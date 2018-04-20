@@ -8,6 +8,7 @@ import TextField from "material-ui/TextField";
 import moment from "moment";
 import InputRange from "react-input-range";
 import AlertDialog from "../dialog";
+import {SERVER_URL} from '../../constants'
 
 class ProfilePage extends React.Component {
     constructor(props) {
@@ -136,7 +137,7 @@ class ProfilePage extends React.Component {
                                 onMouseLeave={this.onMouseLeave}
                                 className="profile-header-img">
                                 <img
-                                    src={`/${user.avatar}`}
+                                    src={`${SERVER_URL}${user.avatar}`}
                                     alt=""
                                     className={isMouseEnter ? "image-overflow" : ''}
                                 />

@@ -2,6 +2,7 @@ import React from "react";
 import Avatar from "material-ui/Avatar";
 import Menu, {MenuItem} from "material-ui/Menu";
 import {SERVER_URL} from "../../constants";
+import {history} from "../../helpers/history";
 
 class UserInfo extends React.Component {
     state = {
@@ -38,18 +39,19 @@ class UserInfo extends React.Component {
                         <i className="zmdi zmdi-caret-down zmdi-hc-fw align-middle"/>
                     </h4>
                 </div>
-                <Menu className="user-info"
-                      id="simple-menu"
-                      anchorEl={this.state.anchorEl}
-                      open={this.state.open}
-                      onClose={this.handleRequestClose}
-                      PaperProps={{
-                          style: {
-                              width: 120,
-                              paddingTop: 0,
-                              paddingBottom: 0
-                          }
-                      }}
+                <Menu
+                    className="user-info"
+                    id="simple-menu"
+                    anchorEl={this.state.anchorEl}
+                    open={this.state.open}
+                    onClose={this.handleRequestClose}
+                    PaperProps={{
+                        style: {
+                            width: 120,
+                            paddingTop: 0,
+                            paddingBottom: 0
+                        }
+                    }}
                 >
                     <MenuItem
                         onClick={() => {

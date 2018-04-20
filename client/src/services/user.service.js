@@ -1,6 +1,6 @@
 import {authHeader} from "../helpers";
 import axios from "axios";
-const API_ROOT = '/api';
+import {API_ROOT} from '../constants'
 
 export const userService = {
     login,

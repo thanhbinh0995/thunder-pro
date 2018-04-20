@@ -1,8 +1,8 @@
 import io from 'socket.io-client';
-
+import {SERVER_URL} from '../../constants';
 export default class Socket {
     constructor() {
-        this.socket = io.connect('/')
+        this.socket = io.connect(SERVER_URL);
         this.socket.on('error', function (err) {
             console.log('received socket error:');
             console.log(err)

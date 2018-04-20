@@ -12,7 +12,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 const fs = require('fs-extra');
 fs.emptyDir(`./client/${publicUrl}`);
-
+const path = require('path');
 
 module.exports = {
     entry: [
@@ -25,11 +25,26 @@ module.exports = {
         filename: '[hash].bundle.js',
         chunkFilename: "[id].[hash].bundle.js"
     },
-    devtool: "source-map",
+    devtool: "#eval-source-map",
     module: {
         loaders: [
-            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-            { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+            {
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                include: path.join(__dirname, 'client/src'),
+                use: [
+                    {
+                        loader: 'babel-loader',
+                        options: {
+                            presets: [
+                                ['es2015', {modules: false}],
+                                'react',
+                                'stage-2',
+                            ],
+                        },
+                    },
+                ],
+            },
             { test: /\.less$/, loaders: [ 'style-loader', 'css-loader', 'less-loader' ] },
             { test: /\.css$/, loaders: [ 'style-loader', 'css-loader'] },
             { test: /\.(png|woff|woff2|eot|ttf|svg|gif)$/, loader: 'url-loader?limit=1024000' }
@@ -52,14 +67,6 @@ module.exports = {
         }),
         HtmlWebpackPluginConfig
     ],
-
-    resolve: {
-        extensions: ['.js', '.jsx'],
-        "alias": {
-            "react": "preact-compat",
-            "react-dom": "preact-compat"
-        }
-    },
     devServer: {
         historyApiFallback: true,
         contentBase: './client',
