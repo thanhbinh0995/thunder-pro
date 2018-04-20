@@ -13,6 +13,7 @@ const Op = Sequelize.Op;
 let userRepository = new UserRepository();
 let likeRepository = new LikeRepository();
 const cache = require('../../helpers/cache');
+import uuidv4 from "uuid/v4";
 
 class UserController {
     index = async (req, res) => {
@@ -221,7 +222,36 @@ class UserController {
         } catch (e) {
             return Response.returnError(res, e.message, HTTPStatus.BAD_REQUEST);
         }
-    }
+    };
+
+    uploadAvatar = async (req, res) => {
+        const userId = req.param('id');
+        const file = req.files.file;
+        const data = {
+            avatar: uuidv4() + ".png"
+        };
+        try {
+            let uploaded = true;
+            file.mv(`server/public/uploads/${data.avatar}`, function(err) {
+                if (err) {
+                    uploaded = false;
+                    return res.status(500).send(err);
+                }
+            });
+            const options = {
+                where: {
+                    id: userId
+                }
+            };
+            let user = await userRepository.update(data, options);
+            return Response.returnSuccess(res, {
+                message: 'Upload avatar completed',
+                fileName: data.avatar,
+            });
+        } catch (e) {
+            return Response.returnError(res, e.message, HTTPStatus.BAD_REQUEST);
+        }
+    };
 }
 
 export default new UserController();
