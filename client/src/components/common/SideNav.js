@@ -9,6 +9,10 @@ import {userActions} from "../../actions";
 class SideNav extends React.PureComponent {
     constructor(props) {
         super(props);
+        const user = JSON.parse(localStorage.getItem('user'));
+        this.state = {
+            user
+        }
     }
 
     componentDidMount() {
@@ -22,8 +26,12 @@ class SideNav extends React.PureComponent {
     };
 
     render() {
+        const {navCollapsed, drawerType, width} = this.props;
+        let {user} = this.props;
+        if (!user) {
+            user = this.state.user;
+        }
 
-        const {navCollapsed, drawerType, width, currentUser} = this.props;
         return (
             <div className={`app-sidebar d-none d-xl-flex`}>
 
@@ -37,9 +45,9 @@ class SideNav extends React.PureComponent {
                     }}
                 >
                     {
-                        currentUser ?
+                        user ?
                             <UserInfo
-                                user={currentUser}
+                                user={user}
                                 onLogOut={this.onLogOut}
                             />
                             : <p>Loading</p>
@@ -69,10 +77,9 @@ class SideNav extends React.PureComponent {
         );
     }
 }
-const mapStateToProps = ({settings, authentication}) => {
-    const {currentUser} = authentication;
+const mapStateToProps = ({settings}) => {
     const {navCollapsed, drawerType, width} = settings;
-    return {navCollapsed, drawerType, width, currentUser}
+    return {navCollapsed, drawerType, width}
 };
 
 export default withRouter(connect(mapStateToProps, {updateWindowWidth})(SideNav));

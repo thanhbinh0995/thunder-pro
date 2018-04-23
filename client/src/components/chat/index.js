@@ -137,7 +137,7 @@ export class Chat extends React.Component {
             if (entry.typing) {
                 this.setState({isDisplayTyping: true})
             } else {
-                this.setState({isDisplayTyping: false, input: ''});
+                this.setState({isDisplayTyping: false});
                 this.updateChatHistory(entry)
                 this.state.socket.getGroups(this.state.user.id);
             }

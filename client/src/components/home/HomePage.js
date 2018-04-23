@@ -48,7 +48,7 @@ class HomePage extends React.Component {
     };
 
     render() {
-        const currentUser = this.props.currentUser;
+        const {currentUser} = this.props;
         let users = this.props.users.items ? this.props.users.items.data.data : null;
         if (currentUser && users && users.length > 0) {
             users = users.filter((user) => {
@@ -61,7 +61,10 @@ class HomePage extends React.Component {
                     <div id="app-site">
                         <div className="app-main">
                             <div className="app-container fixed-drawer">
-                                <SideNav onToggleCollapsedNav={() => this.onToggleCollapsedNav()}/>
+                                <SideNav
+                                    user={currentUser}
+                                    onToggleCollapsedNav={() => this.onToggleCollapsedNav()}
+                                />
                                 <div className="app-main-container">
                                     <main className="app-main-content-wrapper">
                                         <div className="app-main-content">

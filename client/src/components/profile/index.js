@@ -21,7 +21,10 @@ class Profile extends React.Component {
             <div id="app-site">
                 <div className="app-main">
                     <div className="app-container fixed-drawer">
-                        <SideNav onToggleCollapsedNav={() => this.onToggleCollapsedNav()}/>
+                        <SideNav
+                            user={user}
+                            onToggleCollapsedNav={() => this.onToggleCollapsedNav()}
+                        />
                         <div className="app-main-container">
                             <main className="app-main-content-wrapper">
                                 <div className="app-main-content">

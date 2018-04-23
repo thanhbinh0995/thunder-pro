@@ -1,13 +1,52 @@
 import React from "react";
 import {geolocated} from "react-geolocated";
-import Home from '../home/HomePage';
+import Home from "../home/HomePage";
 import SideNav from "../common/SideNav";
-import Header from "../common/Header";
 class Geolocation extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            latitude: null,
+            longitude: null,
+            error: null,
+        };
+    }
+
+    componentDidMount() {
+        this.watchId = navigator.geolocation.watchPosition(
+            (position) => {
+                this.setState({
+                    latitude: position.coords.latitude,
+                    longitude: position.coords.longitude,
+                    error: null,
+                });
+            },
+            (error) => this.setState({error: error.message}),
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000, distanceFilter: 10},
+        );
+    }
+
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchId);
+    }
+
     render() {
-        if (this.props.coords) {
+        const {coords} = this.props;
+        const {latitude, longitude} = this.state;
+        const latitudeProps = coords ?
+            coords.latitude
+            : latitude ?
+                latitude
+                : null;
+        const longitudeProps = coords ?
+            coords.longitude
+            : longitude ?
+                longitude
+                : null;
+        if (latitudeProps && longitudeProps) {
             return (
-                <Home latitude={this.props.coords.latitude} longitude={this.props.coords.longitude} />
+                <Home latitude={latitudeProps} longitude={longitudeProps}/>
             )
         }
         return (
@@ -17,9 +56,6 @@ class Geolocation extends React.Component {
                         <div className="app-container fixed-drawer">
                             <SideNav/>
                             <div className="app-main-container">
-                                <div className="app-header">
-                                    <Header/>
-                                </div>
                                 <main className="app-main-content-wrapper">
                                     <div className="app-main-content">
                                         <div className="app-wrapper app-wrapper-module">

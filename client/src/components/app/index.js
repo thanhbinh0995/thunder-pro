@@ -2,7 +2,6 @@ import React from "react";
 import {connect} from "react-redux";
 import {withRouter} from "react-router-dom";
 import SideNav from "../common/SideNav";
-import Header from "../common/Header";
 import Chat from "../chat/index";
 import {toggleCollapsedNav} from "../../actions/sideNav.action";
 import {getCurrentUser} from "../../actions/user.actions";
@@ -20,11 +19,15 @@ class App extends React.Component {
     };
 
     render() {
+        const {currentUser} = this.props;
         return (
             <div id="app-site">
                 <div className="app-main">
                     <div className="app-container fixed-drawer">
-                        <SideNav onToggleCollapsedNav={() => this.onToggleCollapsedNav()}/>
+                        <SideNav
+                            user={currentUser}
+                            onToggleCollapsedNav={() => this.onToggleCollapsedNav()}
+                        />
                         <div className="app-main-container">
                             <main className="app-main-content-wrapper">
                                 <div className="app-main-content">
