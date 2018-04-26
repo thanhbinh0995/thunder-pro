@@ -2,8 +2,7 @@ import config from "./server/config";
 import Express from "express";
 import BodyParser from "body-parser";
 import Cors from "cors";
-import fileUpload from 'express-fileupload';
-import Http from "http";
+import fileUpload from "express-fileupload";
 import Path from "path";
 import {Web} from "./server/routes/index";
 import Api from "./server/routes/api";
@@ -13,13 +12,18 @@ import io from "socket.io";
 import ClientManager from "./server/controllers/chat/ClientManager";
 import ChatroomManager from "./server/controllers/chat/ChatroomManager";
 import makeHandlers from "./server/controllers/chat/handlers";
-
+import webpush from "web-push";
 
 const app = Express();
 
 app.use(Cors())
     .use(BodyParser.json())
     .use(BodyParser.urlencoded({extended: true}))
+    .use(function (req, res, next) {
+        res.header("Access-Control-Allow-Origin", "*");
+        res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+        next();
+    })
     .use(fileUpload())
     .use(Express.static(Path.resolve(__dirname, 'client'), {maxAge: 31557600000}))
     .use(Express.static(Path.resolve(__dirname, 'server/public/uploads'), {maxAge: 31557600000}))

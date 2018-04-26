@@ -8,7 +8,10 @@ import TextField from "material-ui/TextField";
 import moment from "moment";
 import InputRange from "react-input-range";
 import AlertDialog from "../dialog";
-import {SERVER_URL} from '../../constants'
+import {PUBLIC_KEY, SERVER_URL} from "../../constants";
+import Switch from "material-ui/Switch";
+import WebPush from "../webPush";
+import {payloadFromSubscription} from "../webPush/Utility";
 
 class ProfilePage extends React.Component {
     constructor(props) {
@@ -29,6 +32,8 @@ class ProfilePage extends React.Component {
             isMouseEnter: false,
             selectedFile: null,
             isOpenDialog: false,
+            subscribeUserEnabled: false,
+            subscription: {endpoint: ''},
         };
     }
 
@@ -123,8 +128,50 @@ class ProfilePage extends React.Component {
         this.setState({isOpenDialog: false})
     };
 
+    handleChangeSubscribe = () => {
+        this.setState({
+            subscribeUserEnabled: !this.state.subscribeUserEnabled,
+        })
+    };
+
+    onUpdateSubscriptionOnServer = (subscription) => {
+        console.log("onUpdateSubscriptionOnServer:", subscription)
+        const payload = payloadFromSubscription(subscription)
+        console.log("payload:", JSON.stringify(payload))
+        this.setState({subscription: subscription})
+    };
+
+    onSubscriptionFailed = (error) => {
+        console.log("onSubscriptionFailed:", error)
+    };
+
+
+    onPushNotification = () => {
+        const message = "You have new message"
+        let fakeNotification;
+        Notification.requestPermission().then((result) => {
+            Notification.permission = result;
+        });
+        if (Notification.permission === 'denied') {
+            alert('Please allow notifications before doing this');
+        } else {
+            const randomSeed = Math.random();
+            const options = {
+                body: message,
+                icon: 'favicon.png',
+                tag: randomSeed // required unique tag for each Notification,
+            };
+            fakeNotification = new Notification('Thunder', options);
+            fakeNotification.onclick = function () {
+                window.open('/chat');
+                fakeNotification.close();
+            }
+        }
+        // subscribePush();
+    };
+
     render() {
-        const {user, value, isChange, isMouseEnter, isOpenDialog} = this.state;
+        const {user, value, isChange, isMouseEnter, isOpenDialog, subscribeUserEnabled} = this.state;
         const birthday = moment(user.birthday).format('YYYY-MM-DD');
         return (
             <div id="content" className="content content-full-width">
@@ -182,6 +229,25 @@ class ProfilePage extends React.Component {
                     <div className="tab-content p-0">
                         <div className="tab-pane fade in active show"
                              id="profile-about">
+                            <div className="notification-button">
+                                <Switch
+                                    checked={subscribeUserEnabled}
+                                    onChange={this.handleChangeSubscribe}
+                                    value="checkedA"
+                                />
+                                <WebPush
+                                    subscribeUserEnabled={subscribeUserEnabled}
+                                    applicationServerPublicKey={PUBLIC_KEY}
+                                    onSubscriptionFailed={this.onSubscriptionFailed}
+                                    onUpdateSubscriptionOnServer={this.onUpdateSubscriptionOnServer}
+                                />
+                                <button
+                                    id="notificationRequest"
+                                    onClick={this.onPushNotification}
+                                >
+                                    Push notification
+                                </button>
+                            </div>
                             <div className="table-responsive">
                                 <table className="table table-profile">
                                     <tbody>

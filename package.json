@@ -109,6 +109,7 @@
     "socket.io": "^2.0.4",
     "socket.io-client": "^2.0.4",
     "swagger-jsdoc": "^1.9.7",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "web-push": "^3.3.0"
   }
 }
