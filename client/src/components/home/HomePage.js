@@ -7,7 +7,7 @@ import {getGroupsByUser} from "../../actions/chatAction";
 import {toggleCollapsedNav} from "../../actions/sideNav.action";
 import SwipeCard from "../card/SwipeCard";
 import SideNav from "../common/SideNav";
-import Header from "../common/Header";
+
 class HomePage extends React.Component {
     constructor(props) {
         super(props);

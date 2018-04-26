@@ -4,7 +4,7 @@ import {bindActionCreators} from 'redux';
 import {getCurrentUser} from "../../actions/user.actions";
 import ProfilePage from './ProfilePage';
 import SideNav from "../common/SideNav";
-import Header from "../common/Header";
+
 class Profile extends React.Component {
     constructor(props, context) {
         super(props, context);
