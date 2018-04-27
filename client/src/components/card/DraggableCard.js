@@ -139,7 +139,7 @@ class DraggableCard extends Component {
 
         if (x < 60) {
             displayText.left = true;
-        } else if (x + (offsetWidth + 190) > this.props.containerSize.x) {
+        } else if (x + 700 > this.props.containerSize.x) {
             displayText.right = true;
         } else if (y < -20) {
             displayText.top = true;
