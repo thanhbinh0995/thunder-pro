@@ -45,11 +45,11 @@
     background-size: cover;
     position: absolute;
     height: 80vh;
-    width: 75%;
-    margin: 0 auto;
+    width: 80vh;
     transition: box-shadow .3s;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
     cursor: pointer;
+    margin: 0 !important;
 }
 
 .animate {
@@ -110,8 +110,8 @@
 
 .username {
     position: absolute;
-    bottom: 10vh;
-    left: 5vw;
+    bottom: 4vh;
+    left: 3vw;
     color: #fff
 }
 
@@ -364,4 +364,55 @@
 .swiper-wrapper .arrow-left:hover,
 .swiper-wrapper .arrow-right:hover {
     color: rgba(255, 255, 255, 1);
+}
+
+.like-container {
+    position: absolute;
+    top: 15%;
+    right: 10%;
+    transform: rotate(20deg);
+    transition-duration: .2s;
+    border: 4px solid #16cc1e;
+}
+
+.like-container p {
+    color: #16cc1e;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 2px 4px;
+}
+
+.dislike-container {
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    transform: rotate(-20deg);
+    transition-duration: .2s;
+    border: 4px solid #cc0d11;
+}
+
+.dislike-container p {
+    color: #cc0d11;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 2px 4px;
+}
+
+
+.request-container {
+    position: absolute;
+    top: 5%;
+    left: 40%;
+    transition-duration: .2s;
+    border: 4px solid #1f1dcc;
+}
+
+.request-container p {
+    color: #1f1dcc;
+    font-size: 3em;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 2px 4px;
 }

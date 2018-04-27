@@ -10,8 +10,8 @@ export default class ImageAvatar extends React.Component {
         rotate: 0,
         borderRadius: 0,
         preview: null,
-        width: 160,
-        height: 160,
+        width: 520,
+        height: 520,
     };
 
     convertBase64ToFile = (image) => {

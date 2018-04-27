@@ -57,28 +57,26 @@ class HomePage extends React.Component {
         }
         return (
             <div>
-                <div className="container">
-                    <div id="app-site">
-                        <div className="app-main">
-                            <div className="app-container fixed-drawer">
-                                <SideNav
-                                    user={currentUser}
-                                    onToggleCollapsedNav={() => this.onToggleCollapsedNav()}
-                                />
-                                <div className="app-main-container">
-                                    <main className="app-main-content-wrapper">
-                                        <div className="app-main-content">
-                                            <div className="app-wrapper app-wrapper-module">
-                                                { users && users.length > 0 ?
-                                                    <SwipeCard users={users}
-                                                               requestLikeFriend={(friendId) => this.requestLikeFriend(friendId)}
-                                                               onSendMessage={(userID) => this.onSendMessage(userID)}
-                                                               requestMoreUser={() => this.requestMoreUser()}/>
-                                                    : <p>Loading...</p> }
-                                            </div>
+                <div id="app-site">
+                    <div className="app-main">
+                        <div className="app-container fixed-drawer">
+                            <SideNav
+                                user={currentUser}
+                                onToggleCollapsedNav={() => this.onToggleCollapsedNav()}
+                            />
+                            <div className="app-main-container">
+                                <main className="app-main-content-wrapper">
+                                    <div className="app-main-content">
+                                        <div className="app-wrapper app-wrapper-module">
+                                            { users && users.length > 0 ?
+                                                <SwipeCard users={users}
+                                                           requestLikeFriend={(friendId) => this.requestLikeFriend(friendId)}
+                                                           onSendMessage={(userID) => this.onSendMessage(userID)}
+                                                           requestMoreUser={() => this.requestMoreUser()}/>
+                                                : <p>Loading...</p> }
                                         </div>
-                                    </main>
-                                </div>
+                                    </div>
+                                </main>
                             </div>
                         </div>
                     </div>

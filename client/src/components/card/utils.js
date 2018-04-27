@@ -11,7 +11,7 @@ export const translate3d = (x, y) => {
 
 export const getBackgroundImage = (link) => {
     return {
-        background: `url(${SERVER_URL + link}) no-repeat fixed`
+        background: `url(${SERVER_URL + link}) center center no-repeat`
     }
 };
 export const DIRECTIONS = ['Right', 'Left', 'Top', 'Bottom'];

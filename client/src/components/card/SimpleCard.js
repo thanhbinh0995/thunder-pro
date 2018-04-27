@@ -5,7 +5,7 @@ import {translate3d} from "./utils";
 class Card extends Component {
     constructor(props) {
         super(props);
-        this.state = {initialPosition: {x: 0, y: 0}};
+        this.state = {initialPosition: {x: 0, y: 0}, displayText: {}};
         this.setInitialPosition = this.setInitialPosition.bind(this)
     }
 
@@ -27,8 +27,14 @@ class Card extends Component {
         window.removeEventListener('resize', this.setInitialPosition)
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.displayText) {
+            this.setState({displayText: nextProps.displayText})
+        }
+    }
+
     render() {
-        const {initialPosition: {x, y}} = this.state;
+        const {initialPosition: {x, y}, displayText} = this.state;
         const {className = 'inactive'} = this.props;
         const style = {
             ...translate3d(x, y),
@@ -38,6 +44,15 @@ class Card extends Component {
         return (
             <div style={style} className={`card ${className}`}>
                 {this.props.children}
+                <div className={displayText.right ? "like-container" : "like-container hidden"}>
+                    <p>Like</p>
+                </div>
+                <div className={displayText.left ? "dislike-container" : "dislike-container hidden"}>
+                    <p>Dislike</p>
+                </div>
+                <div className={displayText.top ? "request-container" : "request-container hidden"}>
+                    <p>Request</p>
+                </div>
             </div>
         )
     }

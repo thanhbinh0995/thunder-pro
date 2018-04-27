@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Hammer from "hammerjs";
 import ReactDOM from "react-dom";
 import SimpleCard from "./SimpleCard";
-import {translate3d, getBackgroundImage} from "./utils";
+import {getBackgroundImage, translate3d} from "./utils";
 
 class DraggableCard extends Component {
     constructor(props) {
@@ -13,7 +13,8 @@ class DraggableCard extends Component {
             initialPosition: {x: 0, y: 0},
             startPosition: {x: 0, y: 0},
             animation: null,
-            pristine: true
+            pristine: true,
+            offsetWidth: 0,
         };
         this.resetPosition = this.resetPosition.bind(this);
         this.handlePan = this.handlePan.bind(this)
@@ -48,31 +49,30 @@ class DraggableCard extends Component {
     panend(ev) {
         const screen = this.props.containerSize;
         const card = ReactDOM.findDOMNode(this);
+        this.setState({offsetWidth: card.offsetWidth});
 
         const getDirection = () => {
             switch (true) {
-                case (this.state.x < -50):
+                case (this.state.x < 100):
                     return 'Left';
-                case (this.state.x + (card.offsetWidth - 50) > screen.x):
+                case (this.state.x + (card.offsetWidth + 150) > screen.x):
                     return 'Right';
                 case (this.state.y < -50):
                     return 'Top';
-                case (this.state.y + (card.offsetHeight - 50) > screen.y):
-                    return 'Bottom';
                 default:
                     return false
             }
         };
         const direction = getDirection();
 
+        this.props.onDisplayText(direction);
         if (direction === 'Top') {
             this.props.onSendMessage(this.props.user.id);
         }
         if (this.props[`onSwipe${direction}`]) {
             this.props[`onSwipe${direction}`]();
             this.props[`onOutScreen${direction}`](this.props.index);
-            console.log("index is + " + this.props.index);
-            if (this.props.index < 2 ) {
+            if (this.props.index < 2) {
                 this.props.requestMoreUser();
             }
         } else {
@@ -129,10 +129,29 @@ class DraggableCard extends Component {
     }
 
     render() {
-        const {x, y, animation, pristine} = this.state;
-        const style = Object.assign({}, translate3d(x,y), getBackgroundImage(this.props.avatar));
-        return <SimpleCard {...this.props} style={style}
-                           className={animation ? 'animate' : pristine ? 'inactive' : '' }/>
+        const {x, y, animation, pristine, offsetWidth} = this.state;
+        const style = Object.assign({}, translate3d(x, y), getBackgroundImage(this.props.avatar));
+        let displayText = {
+            left: false,
+            right: false,
+            top: false,
+        };
+
+        if (x < 60) {
+            displayText.left = true;
+        } else if (x + (offsetWidth + 190) > this.props.containerSize.x) {
+            displayText.right = true;
+        } else if (y < -20) {
+            displayText.top = true;
+        }
+        return (
+            <SimpleCard
+                {...this.props}
+                style={style}
+                className={animation ? 'animate' : pristine ? 'inactive' : '' }
+                displayText={displayText}
+            />
+        )
     }
 }
 

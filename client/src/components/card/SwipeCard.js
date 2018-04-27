@@ -4,15 +4,23 @@ import Cards from "./Cards";
 import Card from "./CardSwitcher";
 import moment from "moment";
 
-const CustomAlertLeft = () => <span>Dislike</span>;
-const CustomAlertRight = () => <span>Like</span>;
-const CustomAlertTop = () => <span>Request</span>;
+const displayLeft = false;
+const displayRight = false;
+const displayTop = false;
+
 
 class SwipeCard extends React.Component {
+
     constructor(props) {
         super(props);
+        this.haha = "fd";
         this.state = {
-            users: []
+            users: [],
+            active: {
+                left: false,
+                right: false,
+                top: false,
+            }
         }
     }
 
@@ -20,14 +28,24 @@ class SwipeCard extends React.Component {
         return moment().diff(date, 'years');
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps) {
+            console.log(nextProps);
+        }
+    }
+
+    onDisplayText = (direction) => {
+        console.log(direction);
+        if (direction === 'left') {
+
+        }
+    };
+
     render() {
         let users = this.props.users;
         return (
             <div>
                 <Cards
-                    alertRight={<CustomAlertRight />}
-                    alertLeft={<CustomAlertLeft />}
-                    alertTop={<CustomAlertTop />}
                     onEnd={action('end')}
                     requestLikeFriend={this.props.requestLikeFriend}
                     className='master-root'>
@@ -41,9 +59,11 @@ class SwipeCard extends React.Component {
                             onSwipeTop={action('swipe top')}
                             onSendMessage={this.props.onSendMessage}
                             requestMoreUser={this.props.requestMoreUser}
+                            onDisplayText={this.onDisplayText}
                         >
                             <h2 className="username">{user.username}, <span>{this.getAgeFromBirthday(user.birthday)}</span></h2>
                             <h5 className="distance">{Math.round(user.distance)} km</h5>
+
                         </Card>
                     )}
                 </Cards>
