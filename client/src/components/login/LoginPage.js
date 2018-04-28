@@ -7,6 +7,7 @@ import IconButton from "material-ui/IconButton";
 import Button from "material-ui/Button";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import {history} from "../../helpers/history";
+import {SERVER_URL} from "../../constants";
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class LoginPage extends React.Component {
                 <div className="app-login-main-content">
                     <div className="app-logo-content d-flex align-items-center justify-content-center">
                         <Link className="logo-lg" to="/" title="Jambo">
-                            <img src="" alt="jambo" title="jambo"/>
+                            <img className="image-logo" src={`${SERVER_URL}favicon.png`} alt="thunder" title="thunder"/>
                         </Link>
                     </div>
 

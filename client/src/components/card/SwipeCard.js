@@ -63,7 +63,6 @@ class SwipeCard extends React.Component {
                         >
                             <h2 className="username">{user.username}, <span>{this.getAgeFromBirthday(user.birthday)}</span></h2>
                             <h5 className="distance">{Math.round(user.distance)} km</h5>
-
                         </Card>
                     )}
                 </Cards>

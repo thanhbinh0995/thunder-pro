@@ -67,12 +67,6 @@ class Cards extends Component {
 
         return (
             <div className={className}>
-                {DIRECTIONS.map(d =>
-                    <div key={d}
-                         className={`${this.state[`alert${d}`] ? 'alert-visible' : ''} alert-${d.toLowerCase()} home-alert`}>
-                        {this.props[`alert${d}`]}
-                    </div>
-                )}
                 <div id='cards'>
                     {_cards}
                 </div>
