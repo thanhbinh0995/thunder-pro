@@ -67,6 +67,10 @@ module.exports = {
                 type: Sequelize.STRING(100),
                 allowNull: true,
             },
+            career: {
+                type: Sequelize.STRING(100),
+                allowNull: true,
+            },
             avatar: {
                 type: Sequelize.STRING(100),
                 allowNull: true,
@@ -77,6 +81,14 @@ module.exports = {
             },
             longitude: {
                 type: Sequelize.FLOAT(),
+                allowNull: true,
+            },
+            phone: {
+                type: Sequelize.STRING(20),
+                allowNull: true,
+            },
+            aboutMe: {
+                type: Sequelize.STRING(256),
                 allowNull: true,
             },
             createdAt: {

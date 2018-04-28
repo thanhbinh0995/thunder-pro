@@ -303,7 +303,7 @@ select[multiple], select[size], textarea.form-control {
     overflow: hidden;
     position: relative;
     z-index: 10;
-    margin: 0 0 -20px;
+    margin: 0 0 -45px;
     padding: 3px;
     border-radius: 4px;
     background: #fff
@@ -319,7 +319,7 @@ select[multiple], select[size], textarea.form-control {
 }
 
 .profile-header-img + .profile-header-info {
-    margin-left: 140px
+    margin-left: 160px
 }
 
 .profile-header .profile-header-content, .profile-header .profile-header-tab {
@@ -329,7 +329,7 @@ select[multiple], select[size], textarea.form-control {
 .profile-header .profile-header-tab {
     background: #fff;
     list-style-type: none;
-    margin: 20px 0 0;
+    margin: 35px 0 0;
     padding: 0 0 0 180px;
     white-space: nowrap;
     border-radius: 0

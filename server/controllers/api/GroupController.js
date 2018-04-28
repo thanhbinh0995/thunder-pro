@@ -84,6 +84,7 @@ class GroupController {
             const data = {
                 name: user[0].username + "-" + friend[0].username,
                 nameId: user[0].id + "/" + friend[0].id,
+                avatar: user[0].avatar + "/" + friend[0].avatar,
                 lastMessage: "requested",
                 lastMessageTime: new Date()
             };

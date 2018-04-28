@@ -14,7 +14,10 @@ module.exports = {
                 role: 'ADMIN',
                 birthday: '06/09/1995',
                 sex: "MALE",
-                avatar: '66.png',
+                avatar: 'default.jpg',
+                phone: '01205306225',
+                aboutMe: 'I\'m Binh, nice to meet you',
+                career: 'Professor'
             })
             .then(user => {
                 console.log(user);

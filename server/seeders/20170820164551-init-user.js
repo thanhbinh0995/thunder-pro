@@ -9,9 +9,12 @@ module.exports = {
                 firstName: 'Kay',
                 lastName: 'Stephen',
                 birthday: '02/03/1995',
-                avatar: '66.png',
+                avatar: 'default.jpg',
                 role: 'NORMAL_USER',
-                sex: "FEMALE"
+                sex: "FEMALE",
+                phone: '0120123434',
+                aboutMe: 'My name is Kay Stephen',
+                career: 'Student'
             })
             .then(user => {
                 return true;

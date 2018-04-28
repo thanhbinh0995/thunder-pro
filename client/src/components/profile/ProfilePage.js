@@ -28,6 +28,9 @@ class ProfilePage extends React.Component {
                 gender: false,
                 ageFilter: false,
                 address: false,
+                phone: false,
+                aboutMe: false,
+                career: false
             },
             isMouseEnter: false,
             selectedFile: null,
@@ -196,10 +199,8 @@ class ProfilePage extends React.Component {
                                 }
                             </div>
                             <div className="profile-header-info">
-                                <h4 className="m-t-10 m-b-5">Sean Ngu</h4>
-                                <p className="m-b-10">UXUI + Frontend Developer</p>
-                                <a href="#" className="btn btn-xs btn-yellow">Edit
-                                    Profile</a>
+                                <h4 className="m-t-10 m-b-5">{user.firstName + " " + user.lastName}</h4>
+                                <p className="m-b-10">{user.career}</p>
                             </div>
                         </div>
                         <div>
@@ -300,7 +301,7 @@ class ProfilePage extends React.Component {
                                         <td className="field">Phone</td>
                                         {!isChange.phone ?
                                             <td>
-                                                {user.firstName}
+                                                {user.phone}
                                             </td>
                                             :
                                             <td>
@@ -309,7 +310,7 @@ class ProfilePage extends React.Component {
                                                         id="phone"
                                                         name="phone"
                                                         type="text"
-                                                        value={user.firstName}
+                                                        value={user.phone}
                                                         onChange={(e) => this.onChange(e)}
                                                     />
                                                 </div>
@@ -334,25 +335,24 @@ class ProfilePage extends React.Component {
 
                                     <tr className="highlight">
                                         <td className="field">About me</td>
-                                        {!isChange.description ?
+                                        {!isChange.aboutMe ?
                                             <td>
-                                                {user.firstName}
+                                                {user.aboutMe}
                                             </td>
                                             :
                                             <td>
                                                 <div>
-                                                    <input
-                                                        id="description"
-                                                        name="description"
-                                                        type="text"
-                                                        value={user.firstName}
+                                                    <textarea
+                                                        id="aboutMe"
+                                                        name="aboutMe"
+                                                        value={user.aboutMe}
                                                         onChange={(e) => this.onChange(e)}
                                                     />
                                                 </div>
                                                 <div>
                                                     <input
                                                         onClick={(e) => this.onSaveField(e)}
-                                                        name="description"
+                                                        name="aboutMe"
                                                         type="button"
                                                         value="OK"/>
                                                 </div>
@@ -360,13 +360,50 @@ class ProfilePage extends React.Component {
                                         }
                                         <td className="edit-text">
                                             <a
-                                                name="description"
+                                                name="aboutMe"
                                                 onClick={(e) => this.onChangeField(e)}
                                                 className="m-l-5">
                                                 Edit
                                             </a>
                                         </td>
                                     </tr>
+
+                                    <tr className="highlight">
+                                        <td className="field">Career</td>
+                                        {!isChange.career ?
+                                            <td>
+                                                {user.career}
+                                            </td>
+                                            :
+                                            <td>
+                                                <div>
+                                                    <input
+                                                        id="career"
+                                                        name="career"
+                                                        type="text"
+                                                        value={user.career}
+                                                        onChange={(e) => this.onChange(e)}
+                                                    />
+                                                </div>
+                                                <div>
+                                                    <input
+                                                        onClick={(e) => this.onSaveField(e)}
+                                                        name="career"
+                                                        type="button"
+                                                        value="OK"/>
+                                                </div>
+                                            </td>
+                                        }
+                                        <td className="edit-text">
+                                            <a
+                                                name="career"
+                                                onClick={(e) => this.onChangeField(e)}
+                                                className="m-l-5">
+                                                Edit
+                                            </a>
+                                        </td>
+                                    </tr>
+
                                     <tr className="highlight">
                                         <td className="field">Gender</td>
                                         <td>

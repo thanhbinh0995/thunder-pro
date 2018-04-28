@@ -65,7 +65,6 @@ class DraggableCard extends Component {
         };
         const direction = getDirection();
 
-        this.props.onDisplayText(direction);
         if (direction === 'Top') {
             this.props.onSendMessage(this.props.user.id);
         }
@@ -129,7 +128,7 @@ class DraggableCard extends Component {
     }
 
     render() {
-        const {x, y, animation, pristine, offsetWidth} = this.state;
+        const {x, y, animation, pristine} = this.state;
         const style = Object.assign({}, translate3d(x, y), getBackgroundImage(this.props.avatar));
         let displayText = {
             left: false,
@@ -139,7 +138,7 @@ class DraggableCard extends Component {
 
         if (x < 60) {
             displayText.left = true;
-        } else if (x + 700 > this.props.containerSize.x) {
+        } else if (x + 600 > this.props.containerSize.x) {
             displayText.right = true;
         } else if (y < -20) {
             displayText.top = true;

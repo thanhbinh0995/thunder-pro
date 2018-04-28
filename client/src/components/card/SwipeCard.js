@@ -28,19 +28,6 @@ class SwipeCard extends React.Component {
         return moment().diff(date, 'years');
     }
 
-    componentWillReceiveProps(nextProps) {
-        if (nextProps) {
-            console.log(nextProps);
-        }
-    }
-
-    onDisplayText = (direction) => {
-        console.log(direction);
-        if (direction === 'left') {
-
-        }
-    };
-
     render() {
         let users = this.props.users;
         return (
@@ -59,7 +46,6 @@ class SwipeCard extends React.Component {
                             onSwipeTop={action('swipe top')}
                             onSendMessage={this.props.onSendMessage}
                             requestMoreUser={this.props.requestMoreUser}
-                            onDisplayText={this.onDisplayText}
                         >
                             <h2 className="username">{user.username}, <span>{this.getAgeFromBirthday(user.birthday)}</span></h2>
                             <h5 className="distance">{Math.round(user.distance)} km</h5>

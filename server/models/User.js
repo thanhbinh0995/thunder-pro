@@ -75,6 +75,18 @@ module.exports = (sequelize, DataTypes) => {
         longitude: {
             type: DataTypes.FLOAT(),
             allowNull: true,
+        },
+        phone: {
+            type: DataTypes.STRING(20),
+            allowNull: true,
+        },
+        aboutMe: {
+            type: DataTypes.STRING(256),
+            allowNull: true,
+        },
+        career: {
+            type: DataTypes.STRING(50),
+            allowNull: true,
         }
     }, {
         classMethods: {
