@@ -23,6 +23,7 @@ export class Chat extends React.Component {
             user,
             socket: new socket(),
             groups: null,
+            groupsFilter: null,
             chatHistory: [],
             input: '',
             isDisplayTyping: false,
@@ -35,7 +36,8 @@ export class Chat extends React.Component {
             onlineUsers: [],
             heightBeforeLoadMore: 0,
             isScroll: false,
-            endLoadingMessage: false
+            endLoadingMessage: false,
+            search: '',
         };
         this.onMessageReceived = this.onMessageReceived.bind(this);
         this.onGetOnlineUsers = this.onGetOnlineUsers.bind(this);
@@ -163,8 +165,21 @@ export class Chat extends React.Component {
         return groupSplit[0] === user.username ? groupSplit[1] : groupSplit[0];
     };
 
+    onChangeSearch = (e) => {
+        const name = e.target.value;
+        this.setState({search: name});
+        const groups= this.state.groups;
+        let groupsFilter = null;
+        if (e.target.value !== '') {
+            groupsFilter = groups.filter((group) =>
+                group.name.indexOf(name) > -1
+            );
+        }
+        this.setState({groupsFilter: groupsFilter});
+    };
+
     render() {
-        const {drawerState, groups, user, selectedSectionId, onlineUsers, selectedUser, isDisplayTyping, input, chatHistory, isLoadMoreMessage, isScroll, endLoadingMessage} = this.state;
+        const {drawerState, groups, groupsFilter, user, selectedSectionId, onlineUsers, selectedUser, isDisplayTyping, input, chatHistory, isLoadMoreMessage, isScroll, endLoadingMessage, search} = this.state;
         return (
             <div className="app-module chat-module animated slideInUpTiny animation-duration-3">
                 <div className="chat-module-box">
@@ -176,19 +191,25 @@ export class Chat extends React.Component {
                             onClose={() => this.onToggleDrawer()}
                         >
                             <ChatUsers
-                                user={user} groups={groups}
+                                user={user}
+                                groups={search && search.trim().length > 0 ? groupsFilter : groups}
                                 selectedSectionId={selectedSectionId}
                                 onSelectUser={this.onSelectUser.bind(this)}
                                 onlineUsers={onlineUsers}
+                                onChangeSearch={(group) => this.onChangeSearch(group)}
+                                search={search}
                             />
                         </Drawer>
                     </div>
                     <div className="chat-sidenav d-none d-xl-flex">
                         <ChatUsers
-                            user={user} groups={groups}
+                            user={user}
+                            groups={search && search.trim().length > 0 ? groupsFilter : groups}
                             selectedSectionId={selectedSectionId}
                             onSelectUser={this.onSelectUser.bind(this)}
                             onlineUsers={onlineUsers}
+                            onChangeSearch={(group) => this.onChangeSearch(group)}
+                            search={search}
                         />
                     </div>
                     {this.state.loader ?

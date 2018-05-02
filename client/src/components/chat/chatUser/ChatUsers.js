@@ -10,7 +10,7 @@ class ChatUsers extends React.Component {
     }
 
     render() {
-        const {user, groups} = this.props;
+        const {user, groups, onChangeSearch, search} = this.props;
         return (
             <div className="chat-sidenav-main">
                 <div className="chat-sidenav-header">
@@ -34,7 +34,7 @@ class ChatUsers extends React.Component {
                     </div>
 
                     <div className="search-wrapper">
-                        <SearchBox placeholder="Search or start new chat" value={""}/>
+                        <SearchBox placeholder="Search or start new chat" onChangeSearch={onChangeSearch} search={search}/>
                     </div>
                 </div>
 
