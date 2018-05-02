@@ -4,7 +4,9 @@ import IconButton from "material-ui/IconButton";
 export default class ChatFooter extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            input: ''
+        };
     }
 
     onChange = (e) => {
@@ -13,7 +15,7 @@ export default class ChatFooter extends React.Component {
     };
 
     onKeyPress = (e) => {
-        if (e.key === 'Enter') {
+        if (e.key === 'Enter' && e.target.value.trim().length > 0) {
             this.props.onSendMessage(e)
         }
     };

@@ -99,12 +99,14 @@ export class Chat extends React.Component {
     onSendMessage = () => {
         if (!this.state.input)
             return;
+        if (this.state.input && this.state.input.trim().length > 0) {
+            this.state.socket.message(this.state.user.id, this.state.selectedSectionId, this.state.input, (err) => {
+                if (err)
+                    return console.error(err);
+                this.state.socket.getGroups(this.state.user.id);
+            });
+        }
         this.setState({input: '', isDisplayTyping: false, isScroll: true, isLoadMoreMessage: false});
-        this.state.socket.message(this.state.user.id, this.state.selectedSectionId, this.state.input, (err) => {
-            if (err)
-                return console.error(err);
-            this.state.socket.getGroups(this.state.user.id);
-        });
     };
 
     onLoadMoreMessage = () => {
@@ -138,7 +140,7 @@ export class Chat extends React.Component {
                 this.setState({isDisplayTyping: true})
             } else {
                 this.setState({isDisplayTyping: false});
-                this.updateChatHistory(entry)
+                this.updateChatHistory(entry);
                 this.state.socket.getGroups(this.state.user.id);
             }
         }
@@ -150,6 +152,7 @@ export class Chat extends React.Component {
     }
 
     updateChatHistory(entry) {
+        console.log("new message");
         entry.message && this.setState({chatHistory: this.state.chatHistory.concat(entry)}, () => {
             // this.manageHeight();
         })
@@ -181,10 +184,11 @@ export class Chat extends React.Component {
                         </Drawer>
                     </div>
                     <div className="chat-sidenav d-none d-xl-flex">
-                        <ChatUsers user={user} groups={groups}
-                                   selectedSectionId={selectedSectionId}
-                                   onSelectUser={this.onSelectUser.bind(this)}
-                                   onlineUsers={onlineUsers}
+                        <ChatUsers
+                            user={user} groups={groups}
+                            selectedSectionId={selectedSectionId}
+                            onSelectUser={this.onSelectUser.bind(this)}
+                            onlineUsers={onlineUsers}
                         />
                     </div>
                     {this.state.loader ?
