@@ -22,7 +22,7 @@ export default class ChatroomManager {
 
     getGroupsByUserID = async (userId) => {
         return await groupRepository.find({
-            attributes: ['id', 'name', 'nameId', 'lastMessage', 'lastMessageTime'],
+            attributes: ['id', 'name', 'nameId', 'image', 'lastMessage', 'lastMessageTime'],
             include: [{
                 model: GroupUser,
                 attributes: ['userId'],
@@ -34,7 +34,7 @@ export default class ChatroomManager {
                 ['lastMessageTime', 'DESC'],
             ],
         })
-    }
+    };
 
     getUsersByGroupId = async (groupId) => {
         return await groupUserRepository.find({

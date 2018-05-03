@@ -16,14 +16,6 @@ export default class ChatHeader extends React.Component {
                     <i className="zmdi zmdi-comment-text"/>
                 </IconButton>
                 <div className="chat-main-header-info">
-                    <div className="chat-avatar mr-2">
-                        <div className="chat-avatar-mode">
-                            <img
-                                src="http://demo.g-axon.com/jumbo-react/assets/images/userAvatar/domnic-brown.png"
-                                className="rounded-circle size-60"
-                                alt=""/>
-                        </div>
-                    </div>
                     <div className="chat-contact-name">
                         {displayName}
                     </div>

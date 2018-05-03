@@ -9736,7 +9736,7 @@ label {
 }
 
 .chat-main-header-info {
-    margin-right: auto
+    margin: 0 auto;
 }
 
 .chat-contact-name {

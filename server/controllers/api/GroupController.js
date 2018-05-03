@@ -44,7 +44,7 @@ class GroupController {
         //     } else {
         try {
             let groups = await groupRepository.find({
-                attributes: ['id', 'name', 'lastMessage', 'lastMessageTime'],
+                attributes: ['id', 'name', 'image', 'lastMessage', 'lastMessageTime'],
                 include: [{
                     model: GroupUser,
                     attributes: ['userId'],
@@ -84,7 +84,7 @@ class GroupController {
             const data = {
                 name: user[0].username + "-" + friend[0].username,
                 nameId: user[0].id + "/" + friend[0].id,
-                avatar: user[0].avatar + "/" + friend[0].avatar,
+                image: user[0].avatar + "/" + friend[0].avatar,
                 lastMessage: "requested",
                 lastMessageTime: new Date()
             };

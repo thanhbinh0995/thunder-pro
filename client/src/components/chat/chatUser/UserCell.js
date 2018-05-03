@@ -1,8 +1,11 @@
 import React from "react";
 import moment from "moment";
+import {SERVER_URL} from '../../../constants'
 const UserCell = ({user, group, selectedSectionId, onSelectUser, onlineUsers}) => {
     const groupSplit = group.nameId.split("/");
     const friendId = groupSplit[0] === user.id ? groupSplit[1] : groupSplit[0];
+    const groupImageSplit = group.image.split("/");
+    const image = groupImageSplit[0] === user.avatar ? groupImageSplit[1] : groupImageSplit[0];
     const isOnline = onlineUsers.indexOf(friendId) > -1;
     return (
         <div className={`chat-user-item ${selectedSectionId === group.id ? 'active' : ''}`} onClick={() => {
@@ -11,7 +14,7 @@ const UserCell = ({user, group, selectedSectionId, onSelectUser, onlineUsers}) =
             <div className="chat-user-row row">
                 <div className="chat-avatar col-xl-2 col-3">
                     <div className="chat-avatar-mode">
-                        <img src="http://demo.g-axon.com/jumbo-react/assets/images/userAvatar/domnic-brown.png"
+                        <img src={SERVER_URL + image}
                              className="rounded-circle size-40" alt="Domnic Brown"/>
                         <span className={`chat-mode small ${isOnline ? 'online' : 'offline'}`}/>
                     </div>

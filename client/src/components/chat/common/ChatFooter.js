@@ -15,7 +15,7 @@ export default class ChatFooter extends React.Component {
     };
 
     onKeyPress = (e) => {
-        if (e.key === 'Enter' && e.target.value.trim().length > 0) {
+        if (e.key === 'Enter' && !e.nativeEvent.shiftKey && e.target.value.trim().length > 0) {
             this.props.onSendMessage(e)
         }
     };

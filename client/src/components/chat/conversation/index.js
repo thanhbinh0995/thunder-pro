@@ -20,7 +20,6 @@ class Conversation extends React.Component {
             this.scrollTo(this.state.heightBeforeLoadMore, this.scrollList.scrollHeight - 35);
         }
         if (this.props.isScroll === true && nextProps.isLoadMoreMessage === false) {
-            console.log(nextProps);
             this.scrollToBottom();
         }
     }
@@ -28,6 +27,30 @@ class Conversation extends React.Component {
     componentDidMount(nextProps) {
         this.scrollToBottom();
     }
+
+    onPushNotification = () => {
+        const message = "You have new message";
+        let fakeNotification;
+        Notification.requestPermission().then((result) => {
+            Notification.permission = result;
+        });
+        if (Notification.permission === 'denied') {
+            alert('Please allow notifications before doing this');
+        } else {
+            const randomSeed = Math.random();
+            const options = {
+                body: message,
+                icon: 'favicon.png',
+                tag: randomSeed // required unique tag for each Notification,
+            };
+            fakeNotification = new Notification('Thunder', options);
+            fakeNotification.onclick = function () {
+                window.open('/chat');
+                fakeNotification.close();
+            }
+        }
+        // subscribePush();
+    };
 
     isLastMessage(messages, index) {
         return !(messages[index + 1] && messages[index + 1].User.id !== this.props.user.id);
