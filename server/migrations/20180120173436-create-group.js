@@ -14,6 +14,11 @@ module.exports = {
                 type: Sequelize.STRING(100),
                 defaultValue: 'No Name'
             },
+            image: {
+                allowNull: true,
+                type: Sequelize.STRING(100),
+                defaultValue: 'No Name'
+            },
             nameId: {
                 allowNull: false,
                 type: Sequelize.STRING(100),
