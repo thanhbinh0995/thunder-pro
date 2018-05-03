@@ -30,7 +30,7 @@ module.exports = function () {
             order: [
                 ['createdAt', 'DESC'],
             ],
-            limit: 10,
+            limit: 20,
             offset: offset,
         });
     }

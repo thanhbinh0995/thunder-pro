@@ -154,7 +154,6 @@ export class Chat extends React.Component {
     }
 
     updateChatHistory(entry) {
-        console.log("new message");
         entry.message && this.setState({chatHistory: this.state.chatHistory.concat(entry)}, () => {
             // this.manageHeight();
         })

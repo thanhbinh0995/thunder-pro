@@ -140,6 +140,9 @@ async function update(user) {
         sex: user.sex,
         genderFilter: user.genderFilter,
         avatar: user.avatar,
+        phone: user.phone,
+        aboutMe: user.aboutMe,
+        career: user.career,
     }, requestOptions);
 }
 
